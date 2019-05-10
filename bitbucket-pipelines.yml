@@ -1,4 +1,4 @@
-image: lambci/lambda:python3.6 # CIをまわすDocker image。Docker Hubにあるやつはなんでも使える。
+image: python:3.6.8 # CIをまわすDocker image。Docker Hubにあるやつはなんでも使える。
 
 pipelines:
   default:
