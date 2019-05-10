@@ -1,12 +1,12 @@
-image: python:3.6.8 # CIをまわすDocker image。Docker Hubにあるやつはなんでも使える。
 
 pipelines:
   default:
     - step:
       name: Deploy to test
-      deployment: test
+      image: python:3.6.8 # CIをまわすDocker image。Docker Hubにあるやつはなんでも使える。
+#      deployment: test
       script:
-        # - pip install --user aws-sam-cli
+#        - pip install --user aws-sam-cli
         - pip install awscli
         - pip install aws-sam-cli
         - bash deploy.sh
