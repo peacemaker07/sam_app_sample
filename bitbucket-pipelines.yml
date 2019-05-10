@@ -5,6 +5,7 @@ pipelines:
     - step:
         script:
           # - pip install --user aws-sam-cli
+          - pip install awscli
           - pip install aws-sam-cli
           - bash deploy.sh
 #        services:
