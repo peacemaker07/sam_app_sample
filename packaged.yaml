@@ -27,7 +27,10 @@ Outputs:
 Resources:
   HelloWorldFunction:
     Properties:
-      CodeUri: s3://jsl-aws-sam-test/fea428fea9bafa4f7b344f193445b58a
+      AutoPublishAlias: live
+      CodeUri: s3://jsl-aws-sam-test/02eab2fad5f9f3009cf3696d0029846f
+      DeploymentPreference:
+        Type: Canary10Percent10Minutes
       Events:
         HelloWorld:
           Properties:

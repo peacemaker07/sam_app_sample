@@ -15,6 +15,9 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: hello_world/
+
+      AutoPublishAlias: live
+
       Handler: app.lambda_handler
       Runtime: python3.6
       Events:
@@ -23,6 +26,17 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+
+      DeploymentPreference:
+        Type: Canary10Percent10Minutes
+#        Alarms:
+#          # A list of alarms that you want to monitor
+#          - !Ref AliasErrorMetricGreaterThanZeroAlarm
+#          - !Ref LatestVersionErrorMetricGreaterThanZeroAlarm
+#        Hooks:
+#          # Validation Lambda functions that are run before & after traffic shifting
+#          PreTraffic: !Ref PreTrafficLambdaFunction
+#          PostTraffic: !Ref PostTrafficLambdaFunction
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
