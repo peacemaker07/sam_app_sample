@@ -5,7 +5,7 @@ pipelines:
     - step:
         script:
           # - pip install --user aws-sam-cli
-          - - pip install aws-sam-cli
+          - pip install aws-sam-cli
           - bash deploy.sh
 #        services:
 #          - database
