@@ -6,12 +6,36 @@ pipelines:
         deployment: test
         image: python:3.6.8 # CIをまわすDocker image。Docker Hubにあるやつはなんでも使える。
         script:
-          # - pip install --user aws-sam-cli
           - pip install awscli
           - pip install aws-sam-cli
           - bash deploy.sh
 #        services:
 #          - database
+
+  branches:
+    master:
+      - step:
+          name: deploy production
+          deployment: production
+          image: python:3.6.8 # CIをまわすDocker image。Docker Hubにあるやつはなんでも使える。
+          script:
+            - pip install awscli
+            - pip install aws-sam-cli
+            # - bash deploy.sh
+            - sam build && sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-test
+            - sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-test
+
+    develop:
+      - step:
+          name: deploy staging
+          deployment: staging
+          image: python:3.6.8 # CIをまわすDocker image。Docker Hubにあるやつはなんでも使える。
+          script:
+            - pip install awscli
+            - pip install aws-sam-cli
+            # - bash deploy.sh
+            - sam build && sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-test
+            - sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-test
 
 #definitions:
 #  services:
