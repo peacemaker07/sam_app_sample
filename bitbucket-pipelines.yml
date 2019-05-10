@@ -1,6 +1,5 @@
 # TODO TEST
 # TODO S3へアップロードしたパッケージを削除する処理
-# TODO デプロイの履歴がCodeDeployのデプロイ履歴に表示されない
 
 pipelines:
   default:
