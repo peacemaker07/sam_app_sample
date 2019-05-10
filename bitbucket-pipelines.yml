@@ -22,8 +22,8 @@ pipelines:
             - pip install awscli
             - pip install aws-sam-cli
             # - bash deploy.sh
-            - sam build && sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-test
-            - sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-test
+            - sam build && sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-product
+            - sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-product
 
     develop:
       - step:
@@ -34,8 +34,8 @@ pipelines:
             - pip install awscli
             - pip install aws-sam-cli
             # - bash deploy.sh
-            - sam build && sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-test
-            - sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-test
+            - sam build && sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-staging
+            - sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-staging
 
 #definitions:
 #  services:
