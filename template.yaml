@@ -43,7 +43,8 @@ Resources:
             Method: get
 
       DeploymentPreference:
-        Type: Canary10Percent10Minutes
+        # Type: Canary10Percent10Minutes
+        Type: AllAtOnce
 #        Alarms:
 #          # A list of alarms that you want to monitor
 #          - !Ref AliasErrorMetricGreaterThanZeroAlarm
