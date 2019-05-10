@@ -21,12 +21,12 @@ Parameters:
 Mappings:
   EnvMap:
     prod:
-      LambdaName: 'HelloWorld-prod'
+      LambdaName: 'HelloWorldFunction-prod'
     stg:
-      LambdaName: 'HelloWorld-stg'
+      LambdaName: 'HelloWorldFunction-stg'
 
 Resources:
-  HelloWorldFunction:
+  !FindInMap [ EnvMap, !Ref Env, LambdaName ]:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: hello_world/
@@ -36,7 +36,7 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.6
       Events:
-        !FindInMap [ EnvMap, !Ref Env, LambdaName ]:
+        HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /hello
