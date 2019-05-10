@@ -1,3 +1,5 @@
+# TODO TEST
+# TODO S3へアップロードしたパッケージを削除する処理
 
 pipelines:
   default:
