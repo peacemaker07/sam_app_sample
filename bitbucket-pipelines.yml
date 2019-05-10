@@ -1,5 +1,6 @@
 # TODO TEST
 # TODO S3へアップロードしたパッケージを削除する処理
+# TODO デプロイの履歴がCodeDeployのデプロイ履歴に表示されない
 
 pipelines:
   default:
@@ -25,7 +26,7 @@ pipelines:
             - pip install aws-sam-cli
             # - bash deploy.sh
             - sam build && sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-product
-            - sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-product
+            - sam deploy --template-file packaged.yaml --stack-name sam-app --capabilities CAPABILITY_IAM --region ap-northeast-1 --parameter-overrides Env=prod
 
     develop:
       - step:
@@ -37,7 +38,7 @@ pipelines:
             - pip install aws-sam-cli
             # - bash deploy.sh
             - sam build && sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-staging
-            - sam package --output-template-file packaged.yaml --s3-bucket jsl-aws-sam-staging
+            - sam deploy --template-file packaged.yaml --stack-name sam-app --capabilities CAPABILITY_IAM --region ap-northeast-1 --parameter-overrides Env=stg
 
 #definitions:
 #  services:
