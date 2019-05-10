@@ -1,13 +1,16 @@
 image: python:3.6.8 # CIをまわすDocker image。Docker Hubにあるやつはなんでも使える。
+aws:
+  access-key: $AWS_ACCESS_KEY_ID
+  secret-key: $AWS_SECRET_ACCESS_KEY
 
 pipelines:
   default:
     - step:
-        script:
-          # - pip install --user aws-sam-cli
-          - pip install awscli
-          - pip install aws-sam-cli
-          - bash deploy.sh
+      script:
+        # - pip install --user aws-sam-cli
+        - pip install awscli
+        - pip install aws-sam-cli
+        - bash deploy.sh
 #        services:
 #          - database
 
