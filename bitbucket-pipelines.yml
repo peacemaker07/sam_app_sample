@@ -1,14 +1,18 @@
-# This is a sample build configuration for Python.
-# Check our guides at https://confluence.atlassian.com/x/x4UWN for more examples.
-# Only use spaces to indent your .yml configuration.
-# -----
-# You can specify a custom docker image from Docker Hub as your build environment.
-image: python:3.7.3
+image: lambci/lambda:python3.6 # CIをまわすDocker image。Docker Hubにあるやつはなんでも使える。
 
 pipelines:
   default:
     - step:
-        caches:
-          - pip
-        script: # Modify the commands below to build your repository.
-          - pip install -r requirements.txt
+        script:
+          - pip install --user aws-sam-cli
+#        services:
+#          - database
+
+#definitions:
+#  services:
+#    database:
+#      image: mysql:5.7
+#      environment:
+#        MYSQL_ROOT_PASSWORD: hogehoge
+#        MYSQL_DATABASE:hoge_db
+#        MYSQL_USER: 'root'
