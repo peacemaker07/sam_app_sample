@@ -80,5 +80,5 @@ jobs:
         aws-region: ap-northeast-1
     - name: deploy to dev
       if: startsWith(github.ref, 'refs/heads/feature/')
-      run: bash deploy-to-musubi-dev.sh
+      run: bash deploy.sh
       shell: bash
