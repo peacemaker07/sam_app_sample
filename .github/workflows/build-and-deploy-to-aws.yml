@@ -1,0 +1,84 @@
+name: Build and Deploy to AWS
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.6
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .
+        pip install -e .[testing]
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Test with pytest
+      run: |
+        python -m pytest -v
+        python -m pytest --cov=ocr
+
+  deploy:
+
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.6
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install awscli
+        pip install aws-sam-cli
+
+    - name: Configure AWS credentials for prod
+      if: startsWith(github.ref, 'refs/heads/master')
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+        aws-region: ap-northeast-1
+    - name: deploy to prod
+      if: startsWith(github.ref, 'refs/heads/master')
+      run: bash deploy.sh
+      shell: bash
+
+    - name: Configure AWS credentials for stg
+      if: startsWith(github.ref, 'refs/heads/develop')
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_STG }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_STG }}
+        aws-region: ap-northeast-1
+    - name: deploy to stg
+      if: startsWith(github.ref, 'refs/heads/develop')
+      run: bash deploy.sh
+      shell: bash
+
+    - name: Configure AWS credentials for dev
+      if: startsWith(github.ref, 'refs/heads/feature/')
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+        aws-region: ap-northeast-1
+    - name: deploy to dev
+      if: startsWith(github.ref, 'refs/heads/feature/')
+      run: bash deploy.sh
+      shell: bash
