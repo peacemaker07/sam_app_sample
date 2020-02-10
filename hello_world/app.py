@@ -35,19 +35,17 @@ def lambda_handler(event, context):
 
     #     raise e
 
-    tree = etree.parse('usa-states.xml')
-    root = tree.getroot()
-
-    print('=======')
-    print('root tag = %s' % root.tag)
-    print(etree.tostring(tree).decode())
-    print('=======')
+    # tree = etree.parse('usa-states.xml')
+    # root = tree.getroot()
+    #
+    # print('=======')
+    # print('root tag = %s' % root.tag)
+    # print(etree.tostring(tree).decode())
+    # print('=======')
 
     return {
         "statusCode": 200,
         "body": json.dumps({
             "message": "hello world!",
-            "lxml": etree.tostring(tree).decode(),
-            # "location": ip.text.replace("\n", "")
         }),
     }
