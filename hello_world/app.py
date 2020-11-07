@@ -1,4 +1,5 @@
 import json
+import os
 
 # import requests
 
@@ -42,6 +43,10 @@ def lambda_handler(event, context):
     # print('root tag = %s' % root.tag)
     # print(etree.tostring(tree).decode())
     # print('=======')
+
+    print('--------')
+    print(os.getenv('TABLE_NAME'))
+    print('--------')
 
     return {
         "statusCode": 200,
