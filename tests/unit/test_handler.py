@@ -3,6 +3,7 @@ import json
 import pytest
 
 from hello_world import app
+from hello_world.ec2.base import BaseEc2
 
 
 @pytest.fixture()
@@ -71,3 +72,5 @@ def test_lambda_handler(apigw_event, mocker):
     assert "message" in ret["body"]
     assert data["message"] == "hello world!"
     # assert "location" in data.dict_keys()
+
+    ec2 = BaseEc2()
