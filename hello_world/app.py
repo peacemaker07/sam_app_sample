@@ -1,6 +1,7 @@
 import json
 import os
 
+from ec2.base import BaseEc2
 from utils.helper import get_env
 
 # import requests
@@ -51,6 +52,7 @@ def lambda_handler(event, context):
     print('--------')
 
     get_env('test')
+    ec2 = BaseEc2()
 
     return {
         "statusCode": 200,
