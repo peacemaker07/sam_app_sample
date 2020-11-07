@@ -3,17 +3,17 @@ from setuptools import setup
 requires = [
     'requests==2.22.0',
     'boto3==1.9.156',
-    'mojimoji==0.0.8',
-    'requests-mock==1.6.0',
+    'mojimoji==0.0.11',
+    'requests-mock==1.8.0',
     'sentry-sdk==0.12.3',
     'pytz==2019.1',
-    'lxml==4.3.3',
+    # 'lxml==4.3.3',
 ]
 
 tests_require = [
-    'pytest',
-    'pytest-mock',
-    'pytest-cov',
+    'pytest==6.1.2',
+    'pytest-mock==3.2.0',
+    'pytest-cov==2.7.1',
     'moto==1.3.8',
     'freezegun==0.3.12',
 ]

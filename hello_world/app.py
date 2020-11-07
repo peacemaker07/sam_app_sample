@@ -1,9 +1,11 @@
 import json
 import os
 
+from utils.helper import get_env
+
 # import requests
 
-from lxml import etree
+# from lxml import etree
 
 
 def lambda_handler(event, context):
@@ -47,6 +49,8 @@ def lambda_handler(event, context):
     print('--------')
     print(os.getenv('TABLE_NAME'))
     print('--------')
+
+    get_env('test')
 
     return {
         "statusCode": 200,
