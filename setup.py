@@ -7,7 +7,7 @@ requires = [
     'requests-mock==1.6.0',
     'sentry-sdk==0.12.3',
     'pytz==2019.1',
-    'lxml==4.3.3',
+    'lxml==4.6.2',
 ]
 
 tests_require = [
